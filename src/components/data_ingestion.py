@@ -14,7 +14,7 @@ class DataIngestionConfig:
     train_file_path = os.path.join("artifacts", "train.csv")
     test_file_path = os.path.join("artifacts", "test.csv")
     raw_file_path = os.path.join("artifacts", "raw.csv")
-
+logging.info("Started!")
 class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
@@ -25,7 +25,7 @@ class DataIngestion:
             logging.info("Successfully read the data")
             
             # making dir
-            os.mkdir(os.path.dirname(self.ingestion_config.raw_file_path))
+            os.makedirs(os.path.dirname(self.ingestion_config.raw_file_path), exist_ok=True)
             logging.info("Making folder...")
 
             # saving the csv file
