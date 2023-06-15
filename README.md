@@ -2,7 +2,7 @@
 
 # in process......
 
-conda create -p ml_project python=3.10 -y 
+conda create -n ml_project python=3.10
 
 conda activate env_name/
 
