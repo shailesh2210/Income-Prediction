@@ -1,6 +1,8 @@
 # ml_pipeline_project
 
-conda create -p ml_project python=3.10 -y 
+# in process......
+
+conda create -n ml_project python=3.10
 
 conda activate env_name/
 
