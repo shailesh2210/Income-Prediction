@@ -1,7 +1,7 @@
 pandas
 numpy 
-matpotlib
-seabron
+matplotlib
+seaborn
 sklearn
 flask
 dataclass

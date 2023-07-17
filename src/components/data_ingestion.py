@@ -14,13 +14,15 @@ class DataIngestionConfig:
     train_file_path = os.path.join("artifacts", "train.csv")
     test_file_path = os.path.join("artifacts", "test.csv")
     raw_file_path = os.path.join("artifacts", "raw.csv")
-logging.info("Started!")
+
 class DataIngestion:
     def __init__(self):
         self.ingestion_config = DataIngestionConfig()
 
     def inititate_data_ingestion(self):
         try:
+            logging.info("Data Ingestion Stated!!..")
+            # reading the data
             data = pd.read_csv(os.path.join("data/", "adult.csv"))
             logging.info("Successfully read the data")
             
@@ -35,6 +37,7 @@ class DataIngestion:
             train_set , test_set = train_test_split(data , test_size=0.2, random_state=42)
             logging.info("Successfully splitted data into train and split")
 
+            # saving to artifacts folder
             train_set.to_csv(self.ingestion_config.train_file_path , index= False , header=True)
             test_set.to_csv(self.ingestion_config.test_file_path , index=False , header = True)
 
