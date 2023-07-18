@@ -3,10 +3,15 @@ import sys
 sys.path.append(r"D:\Modular coding End to end\ml_pipeline_project")
 import pandas as pd
 import numpy as np
-from src.logger import logging
-from src.exception import CustmerExcepetion
+
 from dataclasses import dataclass
 from sklearn.model_selection import train_test_split
+
+from src.logger import logging
+from src.exception import CustmerExcepetion
+
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransfromartionConfigs
 
 
 @dataclass
@@ -23,7 +28,7 @@ class DataIngestion:
         logging.info("Data ingestion Started!")
         try:
             # reading the data
-            data = pd.read_csv(os.path.join("notebook/", "adult.csv"))
+            data = pd.read_csv(os.path.join("notebook/", "income_cleandata.csv"))
             logging.info("Successfully read the data")
             
             # making dir
@@ -31,7 +36,7 @@ class DataIngestion:
             logging.info("Making folder...")
 
             # saving the csv file
-            data.to_csv(self.ingestion_config.raw_file_path , index=False)
+            data.to_csv(self.ingestion_config.raw_file_path, index=False)
             logging.info("successfully save the data")
             
             # splitting into train and test 
@@ -55,6 +60,8 @@ class DataIngestion:
 
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.inititate_data_ingestion()
+    train_data , test_data = obj.inititate_data_ingestion()
         
 
+    data_transformation = DataTransformation()
+    data_transformation.inititate_data_transformation(train_data , test_data)
