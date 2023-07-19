@@ -34,7 +34,8 @@ def evaluate_model(x_train , y_train , x_test , y_test,models , params):
             gs.fit(x_train , y_train)
             
             model.set_params(**gs.best_params_)
-            model.fit(x_train , y_train)
+            model.fit(x_train , y_train) 
+            # model. sav
 
             # make prediction 
             y_pred = model.predict(x_test)

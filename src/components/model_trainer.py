@@ -39,7 +39,7 @@ class ModelTrainer:
                 test_arr[:,-1]
             )
             
-            logging.info("Initiate Models") 
+            logging.info("Initiate ML Models") 
 
             models = {
                 "random_forest": RandomForestClassifier(),
