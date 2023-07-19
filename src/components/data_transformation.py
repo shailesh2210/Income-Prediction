@@ -114,22 +114,24 @@ class DataTransformation:
             traget_feature_test_data = test_data[traget_columns]
 
             # Apply transfpormation on our train data and test data
+            logging.info("Applying Standardization on train data")
             input_train_arr = preprocess_obj.fit_transform(input_feature_train_data)
             input_test_arr = preprocess_obj.transform(input_feature_ttest_data)
 
             # Apply preprocessor object on our train data and test data
+            logging.info("Applying Standardization on test data")
             train_array = np.c_[input_train_arr, np.array(traget_feature_train_data)]
             test_array = np.c_[input_test_arr, np.array(traget_feature_test_data)]
 
-
+            logging.info("Saving the pre-processor.pkl file")
             save_obj(file_path=self.data_transformation_config.preprocess_obj_file_path,
                         obj=preprocess_obj)
             
+            logging.info("Data Transformation Completed")
             return (train_array,
                     test_array,
                     self.data_transformation_config.preprocess_obj_file_path)
 
-
-
+            
         except Exception as e:
             raise CustmerExcepetion(e, sys)
