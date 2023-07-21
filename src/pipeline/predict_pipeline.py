@@ -6,44 +6,43 @@
 import os
 import sys
 import pandas as pd
-
+from sklearn.preprocessing import StandardScaler 
 from src.exception import CustmerExcepetion
 from src.logger import logging
 from src.utils import load_obj
-
 from dataclasses import dataclass
 
-@dataclass
+
 class PredictPipeline:
     def __init__(self):
         pass
 
     def predict(self, features):
-        preprocessor_path = os.path.join("artifacts", "preprcessor.pkl")
-        model_path = os.path.join("artifacts" , "model.pkl")
+        preprocessor_path = "artifacts\preprcessor.pkl"
+        model_path = "artifacts\model.pkl"
 
-        preprocessor = load_obj(file_path=preprocessor_path)
-        model = load_obj(file_path=model_path)
+        preprocessor = load_obj(file_path = preprocessor_path)
+        model = load_obj(file_path = model_path)
 
-        scaled_data = preprocessor.transform(features)
-        pred = model.predict(scaled_data)
+        scaled = preprocessor.transform(features)
+        pred = model.predict(scaled)
 
         return pred
     
 class CustomData:
     def __init__(self,
                  age:int,
-                 workclass:int,
-                 education_num:int,
-                 marital_status:int,
-                 occupation:int,
-                 relationship:int,
-                 race:int,
-                 sex:int,
+                 workclass:str,
+                 education_num:str,
+                 marital_status:str,
+                 occupation:str,
+                 relationship:str,
+                 race:str,
+                 sex:str,
                  capital_gain:int,
                  capital_loss:int,
                  hours_per_week:int,
-                 native_country:int):
+                 native_country:str):
         
         self.age = age
         self.workclass = workclass
@@ -72,14 +71,11 @@ class CustomData:
                 "sex":[self.sex],
                 "capital_gain":[self.capital_gain],
                 "capital_loss":[self.capital_loss],
-                "hours_per_weel":[self.hours_per_week],
+                "hours_per_week":[self.hours_per_week],
                 "native_country":[self.native_country]
-
             }
 
-            data = pd.DataFrame(output_as_dict)
-
-            return data
+            return pd.DataFrame(output_as_dict)
         
         except Exception as e:
             raise CustmerExcepetion(e, sys)
